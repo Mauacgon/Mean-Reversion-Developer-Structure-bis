@@ -1,0 +1,19 @@
+trigger: 
+  branches:
+    include:
+    - feature/$(Build.Repository.Name)/*
+    - main
+
+
+resources:      
+  repositories: 
+  - repository: model_build
+    name: BICC Data Science/model_build
+    type: git
+    ref: refs/tags/v3.4.0
+
+
+jobs: 
+
+- template: python_build.yml@model_build
+- template: notebook_build.yml@model_build
